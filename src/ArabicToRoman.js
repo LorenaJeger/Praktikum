@@ -1,4 +1,4 @@
-// 1. funk ne smije biti dulja od 5,6 redaka  ( short methods)
+ // 1. funk ne smije biti dulja od 5,6 redaka  ( short methods)
 //2. single resposibility principal 
 //3. no code duplication 
 //4. no if
@@ -10,4 +10,4 @@ function arabicToRoman(num){
     
 }
 
-module.exports= arabicToRoman; 
+module.exports= arabicToRoman;  
