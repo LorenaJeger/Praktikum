@@ -57,7 +57,7 @@ function findMaxCommets(eu_db, us_db, jp_db, sa_db, year) {
         "sa": formatSaDb(sa_db)
     }
 
-    return analyse_dbs(formated_dbs, year);
+    return analiza(formated_dbs, year);
 }
     
   
@@ -117,7 +117,7 @@ function sort_db(filteredDb){
     }).splice(0, 3)
 }
 
-function filter_database(databases, filter_Year){
+function filter_db(databases, filter_Year){
     let temp = databases.filter(({year}) => { return year === filter_Year })
     return temp.reduce(reduce_data, {})
 }
@@ -127,15 +127,15 @@ function reduce_data(rez, {date, params}){
     return rez
 }
 
-function get_top_data(databases, year){
-    let filter = filter_database(databases, year)
+function top_data(databases, year){
+    let filter = filter_db(databases, year)
     return sort_db(filter)
 }
 
 
-function analyse_dbs(databases, year){
+function analiza(databases, year){
     function reduce_dbs(result, cur){
-        result[cur] = get_top_data(databases[cur], year);
+        result[cur] = top_data(databases[cur], year);
         return result;
     }
 
