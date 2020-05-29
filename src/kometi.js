@@ -50,17 +50,19 @@ var sa_db = [
 function findMaxCommets(eu_db, us_db, jp_db, sa_db, year) {
 	//zadatak 1 definirati izlazni model
     //zadatak 2 implementirati funkcionalnost
-    var us = formatUsDb(us_db)
-    var eu = formatEuDb(eu_db)
-    var jp = formatJpDb(jp_db)
-    var sa = formatSaDb(sa_db)
-    
-    var output = outputData({us, eu, jp, sa}, year)
-    console.table(output)
+    let formated_dbs = {
+        "us": formatUsDb(us_db),
+        "eu": formatEuDb(eu_db),
+        "jp": formatJpDb(jp_db),
+        "sa": formatSaDb(sa_db)
+    }
+
+    return analyse_dbs(formated_dbs, year);
 }
+    
+  
 
 
-findMaxCommets(eu_db, us_db, jp_db, sa_db, 2018)
 
 
 
@@ -104,17 +106,8 @@ function formatSaDb(baza){
 }
 
 
-function filterDb(formatedDb, filterYear){
-    return formatedDb.filter(({year}) =>{
-        return year === filterYear
-    })
-    .reduce((acc, {date, params}) =>{
-        (acc[date] = (acc[date] || [])).push(params)
-        return acc
-    }, {})
-}
 
-function sortDb(filteredDb){
+function sort_db(filteredDb){
     return Object.keys(filteredDb).map((element) =>{
         return {date: element, ocurency: filteredDb[element]}
     }).sort((a, b) =>{
@@ -124,15 +117,30 @@ function sortDb(filteredDb){
     }).splice(0, 3)
 }
 
-function getData(baza, year){
-    var filter = filterDb(baza, year)
-    return sortDb(filter)
+function filter_database(databases, filter_Year){
+    let temp = databases.filter(({year}) => { return year === filter_Year })
+    return temp.reduce(reduce_data, {})
 }
 
-function outputData(baze, year){
-    return Object.keys(baze)
-            .reduce((acc, curr) =>{
-                acc[curr] = getData(baze[curr], year)
-                return acc
-            }, {})
+function reduce_data(rez, {date, params}){
+    (rez[date] = (rez[date] || [])).push(params)
+    return rez
 }
+
+function get_top_data(databases, year){
+    let filter = filter_database(databases, year)
+    return sort_db(filter)
+}
+
+
+function analyse_dbs(databases, year){
+    function reduce_dbs(result, cur){
+        result[cur] = get_top_data(databases[cur], year);
+        return result;
+    }
+
+    return Object.keys(databases).reduce(reduce_dbs, {})
+}
+
+let rez2018= findMaxCommets(eu_db, us_db, jp_db, sa_db, 2018)
+console.log("Top tri dana za 2018", rez2018)
