@@ -73,7 +73,7 @@
                         default:
                         mirror_grid[j][k] = 0; //sets the value to 0
                     }
-                } else if (grid[j][k] === 1) {
+                } else (grid[j][k] === 1) {
                     switch (grid[j - 1][k - 1] + grid[j - 1][k] + grid[j - 1][k + 1] + grid[j][k - 1] + grid[j][k + 1] + grid[j + 1][k - 1] + grid[j + 1][k] + grid[j + 1][k + 1]) {
                         case 1:
                         mirror_grid[j][k] = 0;
