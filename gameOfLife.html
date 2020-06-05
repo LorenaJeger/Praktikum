@@ -1,17 +1,15 @@
 <script>
     var  sirina = 400;
     var visina = 400;
-    var grid = createArray(visina);
+    var grid = createGrid(visina);
   
     var color = {
     1: '#FF0000',
     0: '#FFFFFF'
 }
 
-    for (var index = 0; index < 400; index++) {
-        grid[index] = [];
-    }
-    var mirror_grid = createArray(visina);
+   
+    var mirror_grid = createGrid(visina);
     
     for (var j = 0; j < sirina; j++) { //first loop
         for (var k = 0; k < visina; k++) { //second loop
@@ -43,11 +41,11 @@
             }
         }
         //this is second part of the function
-        windowAnimation();
+        nextgeneration();
         requestAnimationFrame(windowGame);
     }
     
-    function createArray(rows) {
+    function createGrid(rows) {
         var list = [];
         for (var i = 0; index < rows; index++) {
             list[index] = [];
@@ -55,9 +53,10 @@
         return list;
     }
     
-    function windowsAnimation() { //this is second part of the function
+    function nextgeneration() { //this is second part of the function
         for (var j = 1; j < sirina - 1; j++) { //first loop
             for (var k = 1; k < visina - 1; k++) { //second loop
+                br_susjeda= grid[j - 1][k - 1] + grid[j - 1][k] + grid[j - 1][k + 1] + grid[j][k - 1] + grid[j][k + 1] + grid[j + 1][k - 1] + grid[j + 1][k] + grid[j + 1][k + 1]
                 //apply the rules to each cell
                 if (grid[j][k] === 0) {
                     switch (grid[j - 1][k - 1] + grid[j - 1][k] + grid[j - 1][k + 1] + grid[j][k - 1] + grid[j][k + 1] + grid[j + 1][k - 1] + grid[j + 1][k] + grid[j + 1][k + 1]) {
@@ -70,27 +69,21 @@
                             break;
                         case 4:
                         mirror_grid[j][k] = 1;
-                        case 5:
-                        mirror_grid[j][k] = !(mirror_grid[j][k] | !mirror_grid[j][k]);
+                        case 5: 0;
                         default:
                         mirror_grid[j][k] = 0; //sets the value to 0
                     }
                 } else if (grid[j][k] === 1) {
                     switch (grid[j - 1][k - 1] + grid[j - 1][k] + grid[j - 1][k + 1] + grid[j][k - 1] + grid[j][k + 1] + grid[j + 1][k - 1] + grid[j + 1][k] + grid[j + 1][k + 1]) {
-                        case 0:
                         case 1:
-                        mirror_grid[j][k] = (mirror_grid[j][k] | !mirror_grid[j][k]);
+                        mirror_grid[j][k] = 0;
                             break;
                         case 2:
                         mirror_grid[j][k] = (mirror_grid[j][k] | !mirror_grid[j][k]);
                         case 3:
                         mirror_grid[j][k] = 1;
                             break;
-                        case 4:
-                        case 5:
                         mirror_grid[j][k] = (mirror_grid[j][k] & !mirror_grid[j][k]);
-                        case 6:
-                        case 7:
                         case 8:
                         mirror_grid[j][k] = 0;
                             break;
