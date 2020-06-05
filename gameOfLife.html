@@ -63,39 +63,39 @@
                     switch (grid[j - 1][k - 1] + grid[j - 1][k] + grid[j - 1][k + 1] + grid[j][k - 1] + grid[j][k + 1] + grid[j + 1][k - 1] + grid[j + 1][k] + grid[j + 1][k + 1]) {
                         case 1:
                         case 2:
-                            m[j][k] = 0; //sets the value to 0
+                        mirror_grid[j][k] = 0; //sets the value to 0
                             break;
                         case 3:
-                            m[j][k] = 1; //sets the value to 1
+                        mirror_grid[j][k] = 1; //sets the value to 1
                             break;
                         case 4:
-                            m[j][k] = 1;
+                        mirror_grid[j][k] = 1;
                         case 5:
-                            m[j][k] = !(m[j][k] | !m[j][k]);
+                        mirror_grid[j][k] = !(mirror_grid[j][k] | !mirror_grid[j][k]);
                         default:
-                            m[j][k] = 0; //sets the value to 0
+                        mirror_grid[j][k] = 0; //sets the value to 0
                     }
                 } else if (grid[j][k] === 1) {
                     switch (grid[j - 1][k - 1] + grid[j - 1][k] + grid[j - 1][k + 1] + grid[j][k - 1] + grid[j][k + 1] + grid[j + 1][k - 1] + grid[j + 1][k] + grid[j + 1][k + 1]) {
                         case 0:
                         case 1:
-                            m[j][k] = (m[j][k] | !m[j][k]);
+                        mirror_grid[j][k] = (mirror_grid[j][k] | !mirror_grid[j][k]);
                             break;
                         case 2:
-                            m[j][k] = (m[j][k] | !m[j][k]);
+                        mirror_grid[j][k] = (mirror_grid[j][k] | !mirror_grid[j][k]);
                         case 3:
-                            m[j][k] = 1;
+                        mirror_grid[j][k] = 1;
                             break;
                         case 4:
                         case 5:
-                            m[j][k] = (m[j][k] & !m[j][k]);
+                        mirror_grid[j][k] = (mirror_grid[j][k] & !mirror_grid[j][k]);
                         case 6:
                         case 7:
                         case 8:
-                            m[j][k] = 0;
+                        mirror_grid[j][k] = 0;
                             break;
                         default:
-                            m[j][k] = 0;
+                        mirror_grid[j][k] = 0;
               
                     }
     
@@ -105,7 +105,7 @@
     
         for (var j = 0; j < sirina; j++) {
             for (var k = 0; k < visina; k++) {
-                grid[j][k] = m[j][k];
+                grid[j][k] = mirror_grid[j][k];
     
             }
         }
