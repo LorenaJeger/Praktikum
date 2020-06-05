@@ -59,7 +59,7 @@
                 br_susjeda= grid[j - 1][k - 1] + grid[j - 1][k] + grid[j - 1][k + 1] + grid[j][k - 1] + grid[j][k + 1] + grid[j + 1][k - 1] + grid[j + 1][k] + grid[j + 1][k + 1]
                 //apply the rules to each cell
                 if (grid[j][k] === 0) {
-                    switch (grid[j - 1][k - 1] + grid[j - 1][k] + grid[j - 1][k + 1] + grid[j][k - 1] + grid[j][k + 1] + grid[j + 1][k - 1] + grid[j + 1][k] + grid[j + 1][k + 1]) {
+                    switch (br_susjeda) {
                         case 1:
                         case 2:
                         mirror_grid[j][k] = 0; //sets the value to 0
@@ -73,8 +73,8 @@
                         default:
                         mirror_grid[j][k] = 0; //sets the value to 0
                     }
-                } else (grid[j][k] === 1) {
-                    switch (grid[j - 1][k - 1] + grid[j - 1][k] + grid[j - 1][k + 1] + grid[j][k - 1] + grid[j][k + 1] + grid[j + 1][k - 1] + grid[j + 1][k] + grid[j + 1][k + 1]) {
+                } else  {
+                    switch (br_susjeda) {
                         case 1:
                         mirror_grid[j][k] = 0;
                             break;
