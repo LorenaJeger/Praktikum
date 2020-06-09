@@ -21,3 +21,5 @@ function hotelPrice(pricelist) {
 };
 
 hotelPrice(pricelist);
+
+module.exports= hotelPrice;  
